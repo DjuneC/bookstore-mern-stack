@@ -1,14 +1,25 @@
 # GET http://127.0.0.1:5555/
 
-# POST http://127.0.0.1:5555/create-book
+# POST http://127.0.0.1:5555/api/v1/book/create
 # Content-Type: application/json
 
 # {
-#     "title": "Le Seigneur des Anneaux",
+#     "title": "Amazing Spiderman",
 #     "author": "Robert de Niro",
-#     "publishYear": 1992
+#     "publishYear": 2012
 # }
 
 # GET http://127.0.0.1:5555/get-all-books
 
-GET http://127.0.0.1:5555/get-book/6513032301af9b343df84abf
+# GET http://127.0.0.1:5555/get-book/6513032301af9b343df84ab
+
+# DELETE http://127.0.0.1:5555/api/v1/book/remove/6513032301af9b343df84abf
+
+PATCH http://127.0.0.1:5555/api/v1/book/update/651320cfb209f6d891704474
+Content-Type: application/json
+
+{
+    "title": "Amazing Spider-Man",
+    "author": "Stan Lee",
+    "publishYear": 2004
+}
