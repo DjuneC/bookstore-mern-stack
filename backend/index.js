@@ -5,12 +5,21 @@ dotenv.config();
 import express from "express";
 import { PORT, connectDB } from "./config.js";
 import mongoose from "mongoose";
+import cors from "cors";
 import routerBook from "./routes/bookRoutes.js";
 
 const app = express();
 
-//middlewares
+//middleware to handle parsed request
 app.use(express.json());
+
+//middleware to handle cors policy
+//This configuration handle custom cors policy
+app.use(cors({
+  origin: "http//:127.0.0.1:3000/",
+  methods: ["GET", "PATCH", "POST", "DELETE"],
+  allowedHeaders: ['Content-Type']
+}))
 
 //if db connection successful listen to a port
 mongoose
