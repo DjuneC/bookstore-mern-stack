@@ -25,11 +25,11 @@ mongoose
     console.log(error);
   });
 
-app.get('/', (req, res) => {
-    return res.status(200).json({"message":"Everything went through"})
+app.get('/api/v1', (req, res) => {
+    return res.status(200).json({ message : "Everything went through"})
 });
 
-app.post('/create-book', async (req, res) => {
+app.post('/api/v1/book/create', async (req, res) => {
   const {title, author, publishYear} = req.body;
   
   try {
@@ -41,15 +41,34 @@ app.post('/create-book', async (req, res) => {
     await book.save();
     return res.status(201).json(book._id);
   } catch (error) {
-    return res.status(500).json({'message': 'Failed to create the new book'})
+    return res.status(500).json({ message : "Failed to create the new book"})
   }
 });
 
-app.get('/get-all-books', async (req, res) => {
+app.get('/api/v1/book/all', async (req, res) => {
   try {
     const books = await Book.find({}).populate('author');
     return res.status(200).json(books);
   } catch (error) {
-    return res.status(500).json({"message" : "Failed to fetch all books"});
+    return res.status(500).json({ message : "Failed to fetch all books"});
   }
 });
+
+app.get('/api/v1/book/search/:id', async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const book = await Book.findById(id).populate("author");
+
+    if(!book.author){
+      return res.status(400).json({ message : "The book has no associated author"})
+    }
+
+    return res.status(200).json(book);
+  } catch (error) {
+    if (error.name === 'CastError' && error.kind === 'ObjectId'){
+      return res.status(404).json({ message: "The specified book wasn't found"});
+    }
+    return res.status(500).json({"Message": "Failed to fetch book"})
+  }
+})
