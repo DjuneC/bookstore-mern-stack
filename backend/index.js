@@ -39,7 +39,7 @@ app.post('/api/v1/book/create', async (req, res) => {
       }
     )
     await book.save();
-    return res.status(201).json(book._id);
+    return res.status(201).json({id: book._id});
   } catch (error) {
     return res.status(500).json({ message : "Failed to create the new book"})
   }
@@ -84,5 +84,27 @@ app.delete('/api/v1/book/remove/:id', async (req, res) => {
       return res.status(404).json({ message: "The specified book wasn't found"});
     }
     return res.status(500).json({message: "Failed to deleted book"})
+  }
+});
+
+app.patch('/api/v1/book/update/:id', async (req, res) => {
+  const {title, author, publishYear} = req.body;
+
+  try {
+    const existingBook = await Book.findById(req.params.id);
+
+    if(!existingBook){
+      return res.status(404).json({ message: "The specified book wasn't found"});
+    }
+
+    existingBook.title = title;
+    existingBook.author = author;
+    existingBook.publishYear = publishYear;
+
+    await existingBook.save();
+    return res.status(200).json({message: "The specified book has been successfully updated"})
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: "Failed to update book"});
   }
 })
