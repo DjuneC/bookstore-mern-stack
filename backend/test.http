@@ -9,17 +9,17 @@
 #     "publishYear": 2012
 # }
 
-# GET http://127.0.0.1:5555/get-all-books
+GET http://127.0.0.1:5555/api/v1/book/all
 
 # GET http://127.0.0.1:5555/get-book/6513032301af9b343df84ab
 
 # DELETE http://127.0.0.1:5555/api/v1/book/remove/6513032301af9b343df84abf
 
-PATCH http://127.0.0.1:5555/api/v1/book/update/651320cfb209f6d891704474
-Content-Type: application/json
+# PATCH http://127.0.0.1:5555/api/v1/book/update/651320cfb209f6d891704474
+# Content-Type: application/json
 
-{
-    "title": "Amazing Spider-Man",
-    "author": "Stan Lee",
-    "publishYear": 2004
-}
+# {
+#     "title": "Amazing Spider-Man",
+#     "author": "Stan Lee",
+#     "publishYear": 2004
+# }
