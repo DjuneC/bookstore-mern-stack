@@ -16,7 +16,7 @@ app.use(express.json());
 //middleware to handle cors policy
 //This configuration handle custom cors policy
 app.use(cors({
-  origin: "http//:127.0.0.1:3000/",
+  origin: ["http//:127.0.0.1:3000/", "http//:127.0.0.1:5173/"],
   methods: ["GET", "PATCH", "POST", "DELETE"],
   allowedHeaders: ['Content-Type']
 }))
