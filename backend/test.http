@@ -9,4 +9,6 @@
 #     "publishYear": 1992
 # }
 
-GET http://127.0.0.1:5555/get-all-books
+# GET http://127.0.0.1:5555/get-all-books
+
+GET http://127.0.0.1:5555/get-book/6513032301af9b343df84abf
