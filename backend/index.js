@@ -4,12 +4,15 @@ import mongoose from "mongoose";
 
 const app = express();
 
-//make the server listening to a specific port
-app.listen(PORT, () => {
-    console.log("Server is up and running at port : " + PORT)
+//if db connection successful listen to a port
+mongoose
+.connect(connectDB)
+.then(()=>{
+    console.log("App connected to database");
+    app.listen(PORT, () => {
+        console.log("Server is up and running at port : " + PORT)
+    });
 })
-
-//connect to the database
-mongoose.connect(connectDB)
-.then(()=>{})
-.catch(()=>{})
+.catch((error)=>{
+    console.log(error);
+})
