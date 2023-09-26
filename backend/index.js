@@ -71,4 +71,18 @@ app.get('/api/v1/book/search/:id', async (req, res) => {
     }
     return res.status(500).json({"Message": "Failed to fetch book"})
   }
+});
+
+app.delete('/api/v1/book/remove/:id', async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    await Book.findByIdAndDelete(id);
+    return res.status(200).json({message: 'The specified book was deleted successfully'})
+  } catch (error) {
+    if (error.name === 'CastError' && error.kind === 'ObjectId'){
+      return res.status(404).json({ message: "The specified book wasn't found"});
+    }
+    return res.status(500).json({message: "Failed to deleted book"})
+  }
 })
