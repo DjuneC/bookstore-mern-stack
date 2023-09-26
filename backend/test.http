@@ -1,0 +1,12 @@
+# GET http://127.0.0.1:5555/
+
+# POST http://127.0.0.1:5555/create-book
+# Content-Type: application/json
+
+# {
+#     "title": "Le Seigneur des Anneaux",
+#     "author": "Robert de Niro",
+#     "publishYear": 1992
+# }
+
+GET http://127.0.0.1:5555/get-all-books
