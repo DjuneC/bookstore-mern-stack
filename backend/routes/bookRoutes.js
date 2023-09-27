@@ -19,7 +19,7 @@ routerBook.post('/create', async (req, res) => {
     }
   });
   
-routerBook.get('/all', async (req, res) => {
+routerBook.get('/show', async (req, res) => {
     try {
       const books = await Book.find({}).populate('author');
       return res.status(200).json(books);
@@ -28,7 +28,7 @@ routerBook.get('/all', async (req, res) => {
     }
   });
   
-routerBook.get('/search/:id', async (req, res) => {
+routerBook.get('/show/:id', async (req, res) => {
     const {id} = req.params;
   
     try {
