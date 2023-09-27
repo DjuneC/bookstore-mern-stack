@@ -1,7 +1,7 @@
-const AllBook = () => {
+const ShowBook = () => {
   return (
     <div>AllBook</div>
   )
 }
 
-export default AllBook
+export default ShowBook
