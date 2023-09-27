@@ -8,9 +8,10 @@ import axios from "axios";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://127.0.0.1:5555/api/v1/book/show")
       .then((response) => {
@@ -36,11 +37,13 @@ const Home = () => {
       ) : (
         <table className="w-full border-separate border-spacing-2">
           <thead>
-            <th className="border border-slate-600 rounded-md">No</th>
-            <th className="border border-slate-600 rounded-md">Title</th>
-            <th className="border border-slate-600 rounded-md max-md:hidden">Author</th>
-            <th className="border border-slate-600 rounded-md max-md:hidden">Publish Year</th>
-            <th className="border border-slate-600 rounded-md">Operations</th>
+            <tr className="h-8">
+                <th className="border border-slate-600 rounded-md">No</th>
+                <th className="border border-slate-600 rounded-md">Title</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Author</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Publish Year</th>
+                <th className="border border-slate-600 rounded-md">Operations</th>
+            </tr>
           </thead>
           <tbody>
             {books.map((book, index)=>(
@@ -51,7 +54,15 @@ const Home = () => {
                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">{book.publishYear}</td>
                     <td className="border border-slate-700 rounded-md text-center">
                         <div className="flex justify-center gap-x-4">
-                            <Link to={"/book/update"}/>
+                            <Link to={`/books/show/${book._id}`}>
+                                <BsInfoCircle className="text-2xl text-green-800"/>
+                            </Link>
+                            <Link to={`/books/update/${book._id}`}>
+                                <AiOutlineEdit className="text-2xl text-yellow-600"/>
+                            </Link>
+                            <Link to={`/books/remove/${book._id}`}>
+                                <MdOutlineDelete className="text-2xl text-red-600"/>
+                            </Link>
                         </div>
                     </td>
                 </tr>
